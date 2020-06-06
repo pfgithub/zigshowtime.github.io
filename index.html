@@ -9,7 +9,7 @@
     @font-face {
       font-family: 'Press Start 2P';
       src: url('assets/PressStart2P-Regular.ttf') format('truetype');
-    }  
+    }
       html, body {margin: 0; padding: 0;}
       body {
          font-family: 'Press Start 2P', cursive;
@@ -22,6 +22,7 @@
       }
       #zig {
         width: 70vw;
+        height: auto;
         max-width: 340px;
         transform: translateY(-20px);
         filter: drop-shadow(-1px -1px 2px #131315)
@@ -97,7 +98,6 @@
       #countdown {
         color: white;
         font-size: 1.2rem;
-        text-transform: uppercase;
       }
 </style>
 </head>
@@ -106,10 +106,10 @@
   <div id="top-text">The show where members of the Zig community share code and ideas.</div>
   <div style="margin-top: 20px"></div>
   <div id="logo">
-    <img id="zig" src="assets/zig.svg">
-      <h1 id="showtime">
-        SHOWTIME
-      </h1>
+    <img id="zig" width="154" height="140" src="assets/zig.svg">
+    <h1 id="showtime">
+      SHOWTIME
+    </h1>
   </div>
   <div style="margin-top: 18px"></div>
   <div id="next">
@@ -118,15 +118,21 @@
     <div>8am PT / 11am ET / 17.00 CET / 8:30pm IST / 11pm SGT / 11:59pm JST</div>
     <div id="countdown" style="margin-top: 10px"></div>
     <script>
+      const text = document.createTextNode("");
       function updateCountdown() {
-        var timeLeftFromNow = timeLeft("2020-06-07T15:00:00.000Z");
-        var countdownDiv = document.getElementById("countdown");
-        countdownDiv.innerHTML = timeLeftFromNow.days + " days ";
-        countdownDiv.innerHTML += timeLeftFromNow.hours.toString().padStart(2, '0') + ":";
-        countdownDiv.innerHTML += timeLeftFromNow.minutes.toString().padStart(2, '0') + ":";
-        countdownDiv.innerHTML += timeLeftFromNow.seconds.toString().padStart(2, '0');
+        const timeLeftFromNow = timeLeft("2020-06-07T15:00:00.000Z");
+        const s = timeLeftFromNow.days === 1 ? "" : "S";
+        text.nodeValue =
+          timeLeftFromNow.days.toString() + " DAY"+s+", "
+          + timeLeftFromNow.hours.toString().padStart(2, '0') + "h:"
+          + timeLeftFromNow.minutes.toString().padStart(2, '0') + "m:"
+          + timeLeftFromNow.seconds.toString().padStart(2, '0') + "s";
       }
+      updateCountdown();
       setInterval(updateCountdown, 1000);
+      
+      let countdownDiv = document.getElementById("countdown");
+      countdownDiv.appendChild(text);
     </script>
   </div>
   <div style="margin-top: 35px"></div>
