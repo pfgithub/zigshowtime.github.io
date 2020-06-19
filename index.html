@@ -123,7 +123,7 @@
         const timeLeftFromNow = timeLeft("2020-06-07T15:00:00.000Z");
         const s = timeLeftFromNow.days === 1 ? "" : "S";
         text.nodeValue =
-          timeLeftFromNow.days.toString() + " DAY"+s+", "
+          timeLeftFromNow.days.toString() + " DAY"+s+" "
           + timeLeftFromNow.hours.toString().padStart(2, '0') + "h:"
           + timeLeftFromNow.minutes.toString().padStart(2, '0') + "m:"
           + timeLeftFromNow.seconds.toString().padStart(2, '0') + "s";
